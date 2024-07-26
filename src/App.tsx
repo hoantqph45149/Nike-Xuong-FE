@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import AuthForm from "./components/AuthForm";
 import CategoryForm from "./components/CategoryForm";
-import LayoutAdmin from "./components/layouts/LayoutAdmin";
+import LayoutAdmin from "./components/layouts/LayoutAdmin/LayoutAdmin";
 import LayoutClient from "./components/layouts/LayoutClient";
 import ProductForm from "./components/ProductForm";
 import Home from "./pages/Home";
@@ -9,6 +9,8 @@ import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/admin/Dashboard";
 import Product from "./pages/admin/Product";
 import Category from "./pages/admin/Category";
+import Profile from "./pages/Profile";
+import UpdateProfile from "./pages/UpdateProfile";
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LayoutClient />}>
           <Route index element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/edit-profile" element={<UpdateProfile />} />
         </Route>
 
         <Route path="/login" element={<AuthForm isLogin />} />

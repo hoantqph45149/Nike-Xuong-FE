@@ -30,7 +30,7 @@ export const ProductProvider = ({
       try {
         await api.delete(`/products/${id}`);
         dispatch({ type: "REMOVE_PRODUCT", payload: id });
-        nav("/admin");
+        nav("/admin/products");
       } catch (error) {
         console.error(error);
       }
@@ -43,11 +43,11 @@ export const ProductProvider = ({
         if (data._id) {
           const res = await api.patch(`/products/${data._id}`, data);
           dispatch({ type: "UPDATE_PRODUCT", payload: res.data.data });
-          nav("/admin");
+          nav("/admin/products");
         } else {
           const res = await api.post("/products", data);
           dispatch({ type: "CREATE_PRODUCT", payload: res.data.data });
-          nav("/admin");
+          nav("/admin/products");
         }
       } catch (error) {
         console.log(error);

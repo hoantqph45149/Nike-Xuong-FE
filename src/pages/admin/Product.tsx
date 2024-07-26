@@ -25,6 +25,7 @@ const Product = () => {
             <th>ID</th>
             <th>Title</th>
             <th>Price</th>
+            <th>Thumbnail</th>
             <th>Category</th>
             <th>Description</th>
             <th>Action</th>
@@ -36,6 +37,9 @@ const Product = () => {
               <td>{item._id}</td>
               <td>{item.title}</td>
               <td>{item.price}</td>
+              <td>
+                <img src={item.thumbnail} width={100} alt={item.title} />
+              </td>
               <td>
                 {stateCategories.categories.find(
                   (category) => category._id === item.categoryId

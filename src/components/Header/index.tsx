@@ -14,6 +14,7 @@ import style from "./Header.module.scss";
 import { useContext } from "react";
 import { AuthContext, AuthContextType } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import { ligatures } from "@fortawesome/free-brands-svg-icons/fa42Group";
 
 const cx = classNames.bind(style);
 const Header = () => {
@@ -47,11 +48,17 @@ const Header = () => {
                     <span>Welcome, {user?.email}</span>
                   </li>
                   <li>
-                    <button onClick={logout}>Logout</button>
+                    <a href="#" onClick={logout}>
+                      Logout
+                    </a>
                   </li>
-                  {user.role === "admin" && (
+                  {user.role === "admin" ? (
                     <li>
                       <Link to="/admin">Admin</Link>
+                    </li>
+                  ) : (
+                    <li>
+                      <Link to="/profile">Profile</Link>
                     </li>
                   )}
                 </>

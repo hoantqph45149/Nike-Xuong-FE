@@ -1,9 +1,11 @@
-import React from "react";
+import Slideshow from "../components/SlideShow";
 
-type Props = {};
-
-const Home = (props: Props) => {
-  return <div>Home</div>;
+const Home = () => {
+  return (
+    <div>
+      <Slideshow />
+    </div>
+  );
 };
 
 export default Home;

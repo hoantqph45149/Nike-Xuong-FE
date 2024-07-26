@@ -27,9 +27,12 @@ a {
   color: var(--text-color);
   text-decoration: none;
 }
+ul {
+  list-style-type: none;
+}
 form {
   padding: 20px;
-  margin: 0 auto;
+  margin: 50px auto;
   width: 600px;
   border: 1px solid #ccc;
   border-radius: 10px;

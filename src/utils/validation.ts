@@ -1,7 +1,7 @@
 import * as z from "zod";
 
 export const productSchema = z.object({
-  title: z.string().min(6),
+  title: z.string().min(6).trim(),
   price: z.number().min(0),
   description: z.string().optional(),
   categoryId: z.string(),
@@ -12,6 +12,11 @@ export const categorySchema = z.object({
   description: z.string().optional(),
 });
 
+export const profileSchema = z.object({
+  username: z.string().min(6).max(255).trim(),
+  email: z.string().email(),
+});
+
 export const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6).max(255),
@@ -19,8 +24,9 @@ export const loginSchema = z.object({
 
 export const registerSchema = z
   .object({
+    username: z.string().min(6).max(255).trim(),
     email: z.string().email(),
-    password: z.string().min(6).max(255),
+    password: z.string().min(6).max(255).trim(),
     confirmPass: z.string().min(6).max(255),
   })
   .refine((data) => data.password === data.confirmPass, {

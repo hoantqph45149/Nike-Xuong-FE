@@ -7,7 +7,10 @@ import { ProductContext, ProductContextType } from "../contexts/ProductContext";
 import { Product } from "../interfaces/Product";
 import { productSchema } from "../utils/validation";
 
+import ImageUpload from "./ImageUpload";
+
 const ProductForm = () => {
+  const [thumbnail, setThumbnail] = useState<string>("");
   const [categories, setCategories] = useState([]);
   const { handleProduct } = useContext(ProductContext) as ProductContextType;
   const { id } = useParams();
@@ -16,27 +19,39 @@ const ProductForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<Product>({
     resolver: zodResolver(productSchema),
   });
+
+  const handleImageUploadSuccess = (url: string) => {
+    setThumbnail(url);
+  };
+
   useEffect(() => {
     (async () => {
       const { data } = await api.get("/category");
       setCategories(data.data);
     })();
   }, []);
-  if (id) {
-    useEffect(() => {
+
+  useEffect(() => {
+    if (id) {
       (async () => {
         const { data } = await api.get(`/products/${id}`);
         reset(data.data);
+        setValue("categoryId", data.data.categoryId); // Set the default value for categoryId
+        setThumbnail(data.data.thumbnail); // Optionally set the thumbnail if needed
       })();
-    }, []);
-  }
+    }
+  }, [id, reset, setValue]);
+
   return (
     <>
       <form
-        onSubmit={handleSubmit((data) => handleProduct({ ...data, _id: id }))}
+        onSubmit={handleSubmit((data) =>
+          handleProduct({ ...data, thumbnail, _id: id })
+        )}
       >
         <h1 className="text-center">
           {id ? "Update Product" : "Create Product"}
@@ -81,11 +96,11 @@ const ProductForm = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="" className="form-label">
+          <label htmlFor="categoryId" className="form-label">
             Category
           </label>
           <select className="form-select" {...register("categoryId")}>
-            <option>chọn loại sản phẩm</option>
+            <option value="">chọn loại sản phẩm</option>
             {categories.map((category: any) => (
               <option key={category._id} value={category._id}>
                 {category.name}
@@ -96,7 +111,7 @@ const ProductForm = () => {
             <span className="text-danger">{errors.categoryId.message}</span>
           )}
         </div>
-
+        <ImageUpload onUploadedSuccess={handleImageUploadSuccess} />
         <div className="mb-3">
           <button className="btn btn-primary w-100">
             {id ? "Edit product" : "Add product"}

@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../api";
 import { useAuth } from "../contexts/AuthContext";
 import { User } from "../interfaces/User";
@@ -12,6 +12,7 @@ type Props = {
 
 const AuthForm = ({ isLogin }: Props) => {
   const { login: loginContext } = useAuth();
+  const nav = useNavigate();
   const {
     register,
     handleSubmit,
@@ -28,10 +29,12 @@ const AuthForm = ({ isLogin }: Props) => {
         loginContext(res.data.accessToken, res.data.data.user);
       } else {
         const res = await api.post(`/auth/register`, {
+          username: data.username,
           email: data.email,
           password: data.password,
         });
         alert(`Register successfully ${res.data.message}`);
+        nav("/login");
         reset();
       }
     } catch (error) {
@@ -42,6 +45,22 @@ const AuthForm = ({ isLogin }: Props) => {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="text-center">{isLogin ? "Login" : "Register"}</h1>
+        {!isLogin && (
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label">
+              User name
+            </label>
+            <input
+              type="username"
+              className="form-control"
+              id="username"
+              {...register("username")}
+            />
+            {errors.username && (
+              <span className="text-danger">{errors.username.message}</span>
+            )}
+          </div>
+        )}
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
             Email address
