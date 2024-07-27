@@ -33,3 +33,7 @@ export const registerSchema = z
     message: "Password and confirm password must be the same",
     path: ["confirmPass"],
   });
+
+export const forgotPasswordSchema = z.object({
+  email: z.string().email("Email không hợp lệ"),
+});

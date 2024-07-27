@@ -108,11 +108,26 @@ const AuthForm = ({ isLogin }: Props) => {
         <button className="btn btn-success w-100">
           {isLogin ? "Login" : "Register"}
         </button>
-        {isLogin ? (
-          <Link to={"/register"}>Register</Link>
-        ) : (
-          <Link to={"/login"}>Login</Link>
-        )}
+        <div className="mt-3 d-flex justify-content-between">
+          {isLogin ? (
+            <Link
+              className="text-decoration-underline text-primary"
+              to={"/register"}
+            >
+              Register
+            </Link>
+          ) : (
+            <Link to={"/login"}>Login</Link>
+          )}
+          {isLogin && (
+            <Link
+              className="text-decoration-underline text-primary"
+              to={"/forgot-password"}
+            >
+              Forgot Password
+            </Link>
+          )}
+        </div>
       </form>
     </>
   );

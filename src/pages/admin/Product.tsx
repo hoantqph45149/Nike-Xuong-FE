@@ -13,7 +13,7 @@ const Product = () => {
   const { state: stateCategories } = useContext(
     CategoryContext
   ) as CategoryType;
-  console.log(stateCategories);
+  // console.log(stateCategories);
   return (
     <div>
       <Link to="/admin/product-add" className="btn btn-primary mb-3">

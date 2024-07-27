@@ -111,7 +111,17 @@ const ProductForm = () => {
             <span className="text-danger">{errors.categoryId.message}</span>
           )}
         </div>
-        <ImageUpload onUploadedSuccess={handleImageUploadSuccess} />
+        <div className="mb-3">
+          <label htmlFor="thumbnail" className="form-label">
+            Thumbnail
+          </label>
+          <br />
+          <img src={thumbnail} alt="" width="100" />
+          <ImageUpload onUploadedSuccess={handleImageUploadSuccess} />
+          {errors.thumbnail && (
+            <span className="text-danger">{errors.thumbnail.message}</span>
+          )}
+        </div>
         <div className="mb-3">
           <button className="btn btn-primary w-100">
             {id ? "Edit product" : "Add product"}

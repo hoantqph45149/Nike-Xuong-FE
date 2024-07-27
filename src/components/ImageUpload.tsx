@@ -117,6 +117,11 @@ const ImageUpload = ({ initialUrl, onUploadedSuccess }: Props) => {
           className="form-control"
           type="text"
           placeholder="Nhập URL ảnh"
+          id="urlInput"
+          onChange={(e) => {
+            setUploadUrl(e.target.value);
+            onUploadedSuccess(e.target.value);
+          }}
         />
       )}
     </div>

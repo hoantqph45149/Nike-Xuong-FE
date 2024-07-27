@@ -11,6 +11,7 @@ import Product from "./pages/admin/Product";
 import Category from "./pages/admin/Category";
 import Profile from "./pages/Profile";
 import UpdateProfile from "./pages/UpdateProfile";
+import ForgotPassword from "./pages/ForgotPassword";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/edit-profile" element={<UpdateProfile />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Route>
 
         <Route path="/login" element={<AuthForm isLogin />} />
