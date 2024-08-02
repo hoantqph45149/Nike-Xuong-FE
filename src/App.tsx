@@ -4,7 +4,7 @@ import CategoryForm from "./components/CategoryForm";
 import LayoutAdmin from "./components/layouts/LayoutAdmin/LayoutAdmin";
 import LayoutClient from "./components/layouts/LayoutClient";
 import ProductForm from "./components/ProductForm";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/admin/Dashboard";
 import Product from "./pages/admin/Product";
@@ -12,6 +12,8 @@ import Category from "./pages/admin/Category";
 import Profile from "./pages/Profile";
 import UpdateProfile from "./pages/UpdateProfile";
 import ForgotPassword from "./pages/ForgotPassword";
+import Shop from "./pages/Shop/Shop";
+import LayoutSidebar from "./components/layouts/LayoutSidebar";
 
 const App = () => {
   return (
@@ -19,9 +21,16 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LayoutClient />}>
           <Route index element={<Home />} />
+
           <Route path="/profile" element={<Profile />} />
+
           <Route path="/edit-profile" element={<UpdateProfile />} />
+
           <Route path="/forgot-password" element={<ForgotPassword />} />
+        </Route>
+
+        <Route path="/" element={<LayoutSidebar />}>
+          <Route path="/shop" element={<Shop />} />
         </Route>
 
         <Route path="/login" element={<AuthForm isLogin />} />

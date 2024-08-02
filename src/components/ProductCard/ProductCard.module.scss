@@ -1,0 +1,51 @@
+.card {
+  width: 374px;
+  height: auto;
+  margin: 0 auto;
+  // border: 1px solid #eaeaea;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-image {
+  width: 100%;
+  height: 374px;
+  background-color: var(--primary);
+  object-fit: cover;
+}
+
+.product-info {
+  margin-top: 16px;
+}
+
+.status {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: orange;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  &.bestseller {
+    background-color: #ff6f00;
+  }
+  &.soldout {
+    background-color: #ff0000;
+  }
+  &.comingsoon {
+    background-color: #ffa500;
+  }
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+.product-category,
+.product-color,
+.product-price {
+  margin: 4px 0;
+}

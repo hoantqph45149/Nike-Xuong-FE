@@ -1,0 +1,77 @@
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition-duration: 0.4s;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.medium {
+  width: 150px;
+}
+
+.large {
+  width: 200px;
+}
+
+.rounded {
+  border-radius: 50px;
+  border: 1px solid black;
+}
+
+.default {
+  background-color: #111111;
+  color: white;
+}
+
+.colorRed {
+  background-color: red;
+}
+
+.colorGreen {
+  background-color: green;
+}
+
+.colorBlue {
+  background-color: blue;
+}
+
+.colorWhite {
+  background-color: white;
+  color: black;
+}
+
+.colorBlack {
+  background-color: black;
+  color: white;
+}
+
+.borderBlack {
+  border: 2px solid black;
+}
+
+.borderWhite {
+  border: 2px solid white;
+}
+
+.borderRed {
+  border: 2px solid red;
+}
+
+.borderGreen {
+  border: 2px solid green;
+}
+
+.borderBlue {
+  border: 2px solid blue;
+}

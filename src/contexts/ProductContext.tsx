@@ -22,7 +22,7 @@ export const ProductProvider = ({
   useEffect(() => {
     (async () => {
       const { data } = await api.get("/products");
-      dispatch({ type: "SET_PRODUCTS", payload: data.data.docs });
+      dispatch({ type: "SET_PRODUCTS", payload: data.data });
     })();
   }, []);
   const removeProduct = (id?: string) => {

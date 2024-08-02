@@ -1,0 +1,102 @@
+/* ProductDetail.module.scss */
+.container.product-detail {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.col-7 {
+  flex: 0 0 58%;
+  max-width: 58%;
+}
+
+.col-5 {
+  flex: 0 0 38%;
+  max-width: 38%;
+  padding: 20px;
+}
+
+.product-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+}
+
+.product-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-info h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.product-info p {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.size-picker {
+  margin-top: 20px;
+}
+
+.size-picker h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.size-picker ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+}
+
+.size-picker ul li {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.size-picker ul li input {
+  display: none;
+}
+
+.size-picker ul li label {
+  display: block;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.size-picker ul li input:checked + label {
+  background-color: #000;
+  color: #fff;
+}
+
+.prodcut-button {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.prodcut-button button {
+  padding: 20px 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}

@@ -3,6 +3,12 @@ export interface Product {
   title: string;
   price: number;
   description: string;
-  categoryId: string;
+  categoryId: {
+    _id?: string;
+    name: string;
+    description: string;
+    thumbnail: string;
+    slug: string;
+  };
   thumbnail: string;
 }
