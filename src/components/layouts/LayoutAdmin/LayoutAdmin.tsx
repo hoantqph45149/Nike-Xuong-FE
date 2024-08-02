@@ -15,38 +15,37 @@ const LayoutAdmin = () => {
   }
   return (
     <>
-      <div className={cx("row")}>
-        <div className={cx("col-2 p-0")}>
-          <div className={cx("sidebar")}>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/hosts">Quản lý host</Link>
-              </li>
-              <li>
-                <Link to="/users">Xem thống kê</Link>
-              </li>
-              <li>
-                <Link to="/admin">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/admin/users">User</Link>
-              </li>
-              <li>
-                <Link to="/admin/products">Products</Link>
-              </li>
-              <li>
-                <Link to="/admin/categories">Categories</Link>
-              </li>
-              <li>
-                <Link to="/admin/brands">Brands</Link>
-              </li>
-            </ul>
-          </div>
+      <div className={cx("layout-admin")}>
+        <div className={cx("sidebar")}>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/hosts">Quản lý host</Link>
+            </li>
+            <li>
+              <Link to="/users">Xem thống kê</Link>
+            </li>
+            <li>
+              <Link to="/admin">Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/admin/users">User</Link>
+            </li>
+            <li>
+              <Link to="/admin/products">Products</Link>
+            </li>
+            <li>
+              <Link to="/admin/categories">Categories</Link>
+            </li>
+            <li>
+              <Link to="/admin/brands">Brands</Link>
+            </li>
+          </ul>
         </div>
-        <div className={cx("col-10 p-0")}>
+
+        <div className={cx("aside")}>
           <header
             className={cx(
               "d-flex align-items-center justify-content-between p-4",
