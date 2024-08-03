@@ -1,21 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-import ImageUpload from "../components/ImageUpload";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { profileSchema } from "../utils/validation";
-import { User } from "../interfaces/User";
+import { useContext, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import api from "../api";
 import { AuthContext, AuthContextType } from "../contexts/AuthContext";
+import { User } from "../interfaces/User";
+import { profileSchema } from "../utils/validation";
 
 const UpdateProfile = () => {
-  const [avatar, setAvatar] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { logout } = useContext(AuthContext) as AuthContextType;
-
-  const onImageUpload = (url: string) => {
-    setAvatar(url);
-  };
 
   const {
     register,
@@ -31,7 +25,6 @@ const UpdateProfile = () => {
       try {
         const { data } = await api.get(`/auth/me`);
         reset(data.user);
-        setAvatar(data.user.avatar || "");
         setLoading(false);
       } catch (error) {
         setError("Failed to load user data");
@@ -42,9 +35,7 @@ const UpdateProfile = () => {
 
   const onData = async (data: User) => {
     try {
-      const dataUpdate = { ...data, avatar };
-      console.log(dataUpdate);
-      await api.patch(`/auth/update-me`, dataUpdate);
+      await api.patch(`/auth/update-me`, data);
       alert("Bạn đã thay đổi thông tin thành công vui lòng đăng nhập lại!");
       logout();
     } catch (error) {
@@ -93,18 +84,6 @@ const UpdateProfile = () => {
         />
         {errors.email && <p className="text-danger">{errors.email.message}</p>}
       </div>
-      {avatar && (
-        <div className="mb-3">
-          <img
-            src={avatar}
-            className="rounded-circle"
-            alt="User Avatar"
-            width="150"
-            height="150"
-          />
-        </div>
-      )}
-      <ImageUpload onUploadedSuccess={onImageUpload} />
       <div className="mb-3">
         <button type="submit" className="btn btn-primary w-100">
           Update
