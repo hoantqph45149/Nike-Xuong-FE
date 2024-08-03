@@ -1,14 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
-import style from "./ProductCard.module.scss";
+import { Link } from "react-router-dom";
 import { Product } from "../../interfaces/Product";
+import style from "./ProductCard.module.scss";
 const cx = classNames.bind(style);
 type Props = {
   product: Product;
 };
 const ProductCard = ({ product }: Props) => {
-  console.log(product);
+  // console.log(product);
   return (
     <Link to={`/productdetail/${product._id}`} className={cx("card")}>
       <img

@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
 import classNames from "classnames/bind";
+import { useRef } from "react";
 import style from "./Sidebar.module.scss";
 const cx = classNames.bind(style);
 

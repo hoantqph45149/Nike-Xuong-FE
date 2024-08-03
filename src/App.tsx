@@ -1,19 +1,21 @@
 import { Route, Routes } from "react-router-dom";
-import AuthForm from "./components/AuthForm";
-import CategoryForm from "./components/CategoryForm";
-import LayoutAdmin from "./components/layouts/LayoutAdmin/LayoutAdmin";
-import LayoutClient from "./components/layouts/LayoutClient";
-import ProductForm from "./components/ProductForm";
-import Home from "./pages/Home/Home";
-import NotFound from "./pages/NotFound";
-import Dashboard from "./pages/admin/Dashboard";
-import Product from "./pages/admin/Product";
-import Category from "./pages/admin/Category";
-import Profile from "./pages/Profile";
+import LayoutClient from "./components/layouts/LayoutClient/index";
+import Home from "./pages/Home/index";
+import Profile from "./pages/Profile/index";
 import UpdateProfile from "./pages/UpdateProfile";
 import ForgotPassword from "./pages/ForgotPassword";
-import Shop from "./pages/Shop/Shop";
-import LayoutSidebar from "./components/layouts/LayoutSidebar";
+import ProductDetail from "./pages/ProductDetail/index";
+import LayoutSidebar from "./components/layouts/LayoutSidebar/index";
+import Shop from "./pages/Shop/index";
+import AuthForm from "./components/AuthForm";
+import LayoutAdmin from "./components/layouts/LayoutAdmin/index";
+import Dashboard from "./pages/admin/Dashboard";
+import Product from "./pages/admin/Product";
+import ProductForm from "./components/ProductForm";
+import Category from "./pages/admin/Category";
+import CategoryForm from "./components/CategoryForm";
+import NotFound from "./pages/NotFound";
+import UpdateAvata from "./pages/UpdateAvata";
 
 const App = () => {
   return (
@@ -27,6 +29,10 @@ const App = () => {
           <Route path="/edit-profile" element={<UpdateProfile />} />
 
           <Route path="/forgot-password" element={<ForgotPassword />} />
+
+          <Route path="/productdetail/:id" element={<ProductDetail />} />
+
+          <Route path="/edit-avatar/:id" element={<UpdateAvata />} />
         </Route>
 
         <Route path="/" element={<LayoutSidebar />}>

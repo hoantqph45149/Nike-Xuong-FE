@@ -1,7 +1,6 @@
-import React from "react";
-import style from "./PromoBox.module.scss";
 import classNames from "classnames/bind";
 import Button from "../Button";
+import style from "./PromoBox.module.scss";
 
 const cx = classNames.bind(style);
 

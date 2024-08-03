@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext, AuthContextType } from "../contexts/AuthContext";
+import { AuthContext, AuthContextType } from "../../contexts/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 const Profile = () => {
   const { user } = useContext(AuthContext) as AuthContextType;
@@ -9,9 +11,9 @@ const Profile = () => {
     <div>
       <div className="container my-5">
         <div className="row">
-          <div className="col-md-4">
-            <div className="card text-center">
-              <div className="card-body">
+          <div className="col-md-4 ">
+            <div className="card text-center position-relative">
+              <div className="card-body ">
                 <img
                   src={user?.avatar}
                   className="rounded-circle img-thumbnail mb-3"
@@ -19,6 +21,13 @@ const Profile = () => {
                   width="150"
                   height="150"
                 />
+                <Link
+                  to={`/edit-avatar/${user?._id}`}
+                  title="Edit Avatar"
+                  className="top-50 end-40 position-absolute"
+                >
+                  <FontAwesomeIcon icon={faPenToSquare} />
+                </Link>
                 <h5 className="card-title">Tên người dùng: {user?.username}</h5>
                 <p className="card-text">Email: {user?.email}</p>
                 <Link to={`/edit-profile`} className="btn btn-dark">
@@ -42,7 +51,7 @@ const Profile = () => {
                       type="text"
                       className="form-control"
                       id="username"
-                      value={user?.username}
+                      value={user?.username || ""}
                       disabled
                     />
                   </div>
@@ -54,7 +63,7 @@ const Profile = () => {
                       type="email"
                       className="form-control"
                       id="email"
-                      value={user?.email}
+                      value={user?.email || ""}
                       disabled
                     />
                   </div>

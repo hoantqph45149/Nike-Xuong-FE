@@ -1,7 +1,7 @@
 .card {
   width: 374px;
   height: auto;
-  margin: 0 auto;
+  margin-bottom: 50px;
   // border: 1px solid #eaeaea;
   position: relative;
   text-decoration: none;
@@ -48,4 +48,8 @@
 .product-color,
 .product-price {
   margin: 4px 0;
+}
+.product-price {
+  font-weight: 600;
+  font-size: 20px;
 }

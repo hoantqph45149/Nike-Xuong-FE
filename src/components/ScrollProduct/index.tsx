@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import style from "./ScrollProduct.module.scss";
-import classNames from "classnames/bind";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import classNames from "classnames/bind";
+import { useEffect } from "react";
+import style from "./ScrollProduct.module.scss";
 
 const cx = classNames.bind(style);
 
