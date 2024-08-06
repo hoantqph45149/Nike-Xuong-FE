@@ -16,6 +16,7 @@ import Category from "./pages/admin/Category";
 import CategoryForm from "./components/CategoryForm";
 import NotFound from "./pages/NotFound";
 import UpdateAvata from "./pages/UpdateAvata";
+import CartProduct from "./pages/CartProduct";
 
 const App = () => {
   return (
@@ -33,6 +34,8 @@ const App = () => {
           <Route path="/productdetail/:id" element={<ProductDetail />} />
 
           <Route path="/edit-avatar/:id" element={<UpdateAvata />} />
+
+          <Route path="/cart-product" element={<CartProduct />} />
         </Route>
 
         <Route path="/" element={<LayoutSidebar />}>

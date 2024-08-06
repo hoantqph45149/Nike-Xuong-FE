@@ -2,13 +2,19 @@ export interface Product {
   _id?: string;
   title: string;
   price: number;
-  description: string;
+  description?: string;
   categoryId: {
-    _id?: string;
+    _id: string;
     name: string;
-    description: string;
-    thumbnail: string;
     slug: string;
+    description: string;
+    isHidden: boolean;
+    products: string[];
   };
-  thumbnail: string;
+  thumbnail?: string;
+  sizes: Array<{
+    _id?: string;
+    size: string;
+    quantity: number;
+  }>;
 }

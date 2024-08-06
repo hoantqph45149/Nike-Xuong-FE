@@ -1,10 +1,17 @@
 import * as z from "zod";
 
+const sizeSchema = z.object({
+  size: z.string().min(1, "Size is required"),
+  quantity: z.number().min(0, "Quantity must be at least 0").optional(),
+});
+
 export const productSchema = z.object({
-  title: z.string().min(6).trim(),
-  price: z.number().min(0),
+  title: z.string().min(6, "Title must be at least 6 characters").trim(),
+  price: z.number().min(0, "Price must be a positive number"),
   description: z.string().optional(),
-  categoryId: z.string(),
+  categoryId: z.string().min(1, "Category ID is required"),
+  sizes: z.array(sizeSchema).min(1, "At least one size is required"), // Thêm xác thực cho sizes
+  thumbnail: z.string().url().optional(), // Thêm xác thực cho thumbnail (có thể là URL)
 });
 
 export const categorySchema = z.object({

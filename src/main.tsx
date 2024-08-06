@@ -7,10 +7,12 @@ import { ProductProvider } from "./contexts/ProductContext.tsx";
 import { AuthProvider } from "./contexts/AuthContext.tsx";
 import { CategoryPovider } from "./contexts/CategoryContext.tsx";
 import CartProvider from "./contexts/CartContext.tsx";
+import ToastManager from "./components/ToastManager/index.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
+      <ToastManager />
       <CartProvider>
         <CategoryPovider>
           <AuthProvider>

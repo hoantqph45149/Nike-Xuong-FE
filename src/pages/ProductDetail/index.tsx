@@ -1,103 +1,103 @@
 import classNames from "classnames/bind";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 import api from "../../api";
-import style from "./ProductDetail.module.scss";
 import Button from "../../components/Button";
+import { CartContext, CartContextType } from "../../contexts/CartContext";
 import { Product } from "../../interfaces/Product";
-
+import style from "./ProductDetail.module.scss";
 const cx = classNames.bind(style);
+
 const ProductDetail = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState<Product>({} as Product);
-  const sizes = [
-    {
-      id: 1,
-      size: "37",
-    },
-    {
-      id: 2,
-      size: "38",
-    },
-    {
-      id: 3,
-      size: "39",
-    },
-    {
-      id: 4,
-      size: "40",
-    },
-    {
-      id: 5,
-      size: "41",
-    },
-    {
-      id: 6,
-      size: "42",
-    },
-    {
-      id: 7,
-      size: "43",
-    },
-    {
-      id: 8,
-      size: "44",
-    },
-  ];
+  const [product, setProduct] = useState<Product | null>(null);
+  const [quantity, setQuantity] = useState<number>(1);
+  const [size, setSize] = useState<string>("");
+  const [sizeError, setSizeError] = useState<boolean>(false);
+  const { addToCart } = useContext(CartContext) as CartContextType;
+  // console.log(size);
   useEffect(() => {
     (async () => {
       try {
         const { data } = await api.get(`/products/${id}`);
-        console.log(data);
         setProduct(data.data);
       } catch (error) {
-        console.log(error);
+        console.error("Failed to fetch product:", error);
       }
     })();
   }, [id]);
-  // console.log(product);
+
+  const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSize(event.target.value);
+    setSizeError(false);
+  };
+
+  const handleAddToCart = () => {
+    if (!size) {
+      setSizeError(true);
+      return;
+    }
+    if (product) {
+      addToCart(String(product._id), quantity, size);
+    }
+  };
+
   return (
-    <div className={cx("container", "product-detail")}>
+    <div className={cx("container mb-5 mt-5", "product-detail")}>
       <div className={cx("row")}>
         <div className={cx("col-7", "product-image")}>
-          <img src={product.thumbnail} alt="" />
+          {product?.thumbnail ? (
+            <img src={product.thumbnail} alt={product.title} />
+          ) : (
+            <p>Loading image...</p>
+          )}
         </div>
         <div className={cx("col-5", "product-info")}>
-          <h2>{product.title}</h2>
-          <p className="mt-1">{product.categoryId?.name}</p>
-          <p className="mt-5">{product.price} $</p>
-          <div className={cx("size-picker")}>
+          <h2>{product?.title || "Loading..."}</h2>
+          <p className="mt-1">{product?.categoryId?.name || "Loading..."}</p>
+          <p className="mt-5">
+            {product?.price ? `${product.price} $` : "Loading..."}
+          </p>
+          <div className={cx("size-picker", { "border-red": sizeError })}>
             <h2>Kích cỡ</h2>
             <ul>
-              {sizes.map((size) => (
-                <li key={size.id}>
+              {product?.sizes?.map((s) => (
+                <li key={s._id}>
                   <input
+                    onChange={handleSizeChange}
                     type="radio"
-                    id={`size_${size.id}`}
+                    id={`size_${s.size}`}
                     name="size"
-                    value={size.id}
+                    value={s.size}
+                    checked={size === s.size}
                   />
-                  <label htmlFor={`size_${size.id}`}>{size.size}</label>
+                  <label htmlFor={`size_${s.size}`}>{s.size}</label>
                 </li>
               ))}
             </ul>
+            {sizeError && (
+              <p className={cx("error-message")}>Vui lòng chọn kích cỡ</p>
+            )}
           </div>
-          <div className={cx("prodcut-button")}>
-            <Button size={"fullWidth"} color={"colorBlack"}>
-              {" "}
-              Add to cart{" "}
+          <div className={cx("product-button")}>
+            <Button
+              onClick={handleAddToCart}
+              size={"fullWidth"}
+              color={"colorBlack"}
+            >
+              Thêm vào giỏ
             </Button>
             <Button
               size={"fullWidth"}
               color={"colorWhite"}
               border={"borderBlack"}
             >
-              {" "}
-              Favourite{" "}
+              Yêu thích
             </Button>
           </div>
           <div className={cx("product-description")}>
-            <p>{product.description}</p>
+            <p>{product?.description || "Loading description..."}</p>
           </div>
         </div>
       </div>

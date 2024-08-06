@@ -1,54 +1,135 @@
-import React, { createContext, useReducer } from "react";
-import cartReducer, { CartItem } from "../reduces/Cart";
-import { Product } from "../interfaces/Product";
+import React, { createContext, useEffect, useReducer } from "react";
 import api from "../api";
+import { notifyError, notifySuccess } from "../components/ToastManager/index";
+import { CartItem, cartReducer } from "../reduces/Cart";
+import MyLoader from "./../components/MyLoader/index";
 
 export type CartContextType = {
   state: {
     products: CartItem[];
-    totalPrice: number;
+    totalAmount: number;
   };
   dispatch: React.Dispatch<any>;
-  addToCart: (product: Product, quantity: number) => void;
-  getCart: () => void;
+  addToCart: (productId: string, quantity: number, size: string) => void;
   checkout: () => void;
-  removeFormCart: (productId: string) => void;
+  removeFromCart: (productId: string, size: string) => void;
+  updateCart: (
+    productId: string,
+    quantity: number,
+    size: string,
+    oldSize: string
+  ) => void;
 };
-const initalState = {
+
+const initialState = {
   products: [],
-  totalPrice: 0,
+  totalAmount: 0,
 };
+
 export const CartContext = createContext({} as CartContextType);
 
 const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = useReducer(cartReducer, initalState);
-  const addToCart = async (product: Product, quantity: number) => {
-    const res = await api.post("/cart", { product, quantity });
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: { product: res.data.product, quantity },
-    });
+  const [state, dispatch] = useReducer(cartReducer, initialState);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await api.get("/cart");
+        dispatch({
+          type: "SET_CART",
+          payload: {
+            products: res.data.products,
+            totalAmount: res.data.totalAmount,
+          },
+        });
+      } catch (error) {
+        // console.error("Error fetching cart data:", error);
+      }
+    })();
+  }, []);
+
+  const addToCart = async (
+    productId: string,
+    quantity: number,
+    size: string
+  ) => {
+    try {
+      const res = await api.post("/cart", { productId, quantity, size });
+
+      console.log(res.data);
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: {
+          product: res.data.product,
+          quantity: res.data.quantity,
+          size: res.data.size,
+        },
+      });
+      notifySuccess("Add to cart successfully");
+    } catch (error) {
+      notifyError("Error adding product to cart");
+    }
   };
-  const getCart = async () => {
-    const res = await api.get("/cart");
-    dispatch({ type: "SET_CART", payload: res.data });
+  const updateCart = async (
+    productId: string,
+    quantity: number,
+    size: string,
+    oldSize: string
+  ) => {
+    try {
+      const res = await api.post("/cart/update", {
+        productId,
+        quantity,
+        size,
+        oldSize,
+      });
+      dispatch({
+        type: "UPDATE_CART",
+        payload: {
+          product: res.data.product,
+          quantity: res.data.quantity,
+        },
+      });
+      MyLoader({ isVisible: false });
+    } catch (error) {
+      notifyError("Error adding product to cart");
+    }
   };
 
-  const removeFormCart = async (productId: string) => {
-    const res = await api.delete(`/cart/${productId}`);
-    res.data.success &&
-      dispatch({ type: "REMOVE_FORM_CART", payload: { productId } });
+  const removeFromCart = async (productId: string, size: string) => {
+    try {
+      await api.post(`/cart/remove`, { productId, size });
+      dispatch({ type: "REMOVE_FROM_CART", payload: { productId, size } });
+      notifySuccess("Successfully removed from cart");
+    } catch (error) {
+      notifyError("Error removing product from cart");
+    }
   };
+
   const checkout = async () => {
-    const res = await api.post("cart/checkout");
-    dispatch({ type: "CHECKOUT", payload: res.data });
+    try {
+      const res = await api.post("/cart/checkout");
+
+      notifySuccess("Checkout successful");
+    } catch (error) {
+      notifyError("Error checking out");
+    }
   };
+
   return (
     <CartContext.Provider
-      value={{ state, dispatch, addToCart, getCart, removeFormCart, checkout }}
+      value={{
+        state,
+        dispatch,
+        addToCart,
+        removeFromCart,
+        checkout,
+        updateCart,
+      }}
     >
       {children}
     </CartContext.Provider>
   );
 };
+
 export default CartProvider;

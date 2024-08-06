@@ -110,9 +110,9 @@ const Header = () => {
               </div>
             </div>
             <div className={cx("cart")}>
-              <a href="/cart">
+              <Link to="/cart-product">
                 <FontAwesomeIcon icon={faBagShopping} />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -38,6 +38,7 @@
 .product-info {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .product-info h2 {
@@ -61,7 +62,10 @@
 }
 
 .size-picker ul {
+  width: 100%;
+  border-radius: 5px;
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   list-style-type: none;
   padding: 0;
@@ -85,18 +89,24 @@
 }
 
 .size-picker ul li input:checked + label {
-  background-color: #000;
+  background-color: #ccc;
   color: #fff;
 }
 
-.prodcut-button {
+.product-button {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
 }
 
-.prodcut-button button {
-  padding: 20px 20px;
+.product-button button {
+  padding: 20px;
   margin-bottom: 10px;
   cursor: pointer;
+}
+.error-message {
+  color: red;
+  font-size: 14px;
+  //   margin-bottom: 10px;
+  // }
 }
