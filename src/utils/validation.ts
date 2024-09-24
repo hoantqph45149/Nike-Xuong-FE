@@ -44,3 +44,16 @@ export const registerSchema = z
 export const forgotPasswordSchema = z.object({
   email: z.string().email("Email không hợp lệ"),
 });
+
+export const CheckoutSchema = z.object({
+  name: z.string().trim().min(1, "Name is required"),
+  phone: z
+    .string()
+    .regex(
+      /^(0[3|5|7|8|9][0-9]{8}|(84[3|5|7|8|9][0-9]{8}))$/,
+      "Invalid phone number format"
+    ),
+  address: z.string().trim().min(1, "Address is required"),
+  payment: z.string().min(1, "Payment is required"),
+  note: z.string().optional(),
+});

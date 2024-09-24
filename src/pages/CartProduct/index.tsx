@@ -130,7 +130,11 @@ const CartProduct = () => {
                 <p>{state.totalAmount} $</p>
               </div>
               <div className={cx("checkout")}>
-                <Button size={"fullWidth"} color={"colorBlack"}>
+                <Button
+                  href="/checkout"
+                  size={"fullWidth"}
+                  color={"colorBlack"}
+                >
                   Checkout
                 </Button>
               </div>

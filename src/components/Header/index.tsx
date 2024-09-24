@@ -9,16 +9,29 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
-import images from "../../assets/images";
-import style from "./Header.module.scss";
 import { useContext } from "react";
-import { AuthContext, AuthContextType } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
-import { ligatures } from "@fortawesome/free-brands-svg-icons/fa42Group";
+import images from "../../assets/images";
+import { AuthContext, AuthContextType } from "../../contexts/AuthContext";
+import style from "./Header.module.scss";
+import {
+  ProductContext,
+  ProductContextType,
+} from "../../contexts/ProductContext";
 
 const cx = classNames.bind(style);
 const Header = () => {
   const { user, logout } = useContext(AuthContext) as AuthContextType;
+  const { searchProduct } = useContext(ProductContext) as ProductContextType;
+
+  const handleSearch = (e: any) => {
+    if (e.keyCode === 13 && e.target.value.trim() !== "") {
+      e.preventDefault();
+      searchProduct(e.target.value);
+    } else {
+      return;
+    }
+  };
   return (
     <header>
       <div className={cx("header")}>
@@ -104,8 +117,15 @@ const Header = () => {
           </div>
           <div className={cx("search")}>
             <div className={cx("search-input")}>
-              <input type="text" placeholder="Search" />{" "}
-              <div className={cx("search-icon")}>
+              <input
+                type="text"
+                placeholder="Search"
+                onKeyUp={(e) => handleSearch(e as any)}
+              />{" "}
+              <div
+                onClick={(e) => handleSearch(e as any)}
+                className={cx("search-icon")}
+              >
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
               </div>
             </div>

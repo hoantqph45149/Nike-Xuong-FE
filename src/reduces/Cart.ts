@@ -20,7 +20,8 @@ type Action =
     }
   | { type: "REMOVE_FROM_CART"; payload: { productId: string; size: string } }
   | { type: "SET_CART"; payload: { products: CartItem[]; totalAmount: number } }
-  | { type: "UPDATE_CART"; payload: { product: Product; quantity: number } };
+  | { type: "UPDATE_CART"; payload: { product: Product; quantity: number } }
+  | { type: "CHECKOUT"; payload: { products: CartItem[]; totalPrice: number } };
 
 const calculateTotalAmount = (products: CartItem[]): number => {
   return products.reduce(
@@ -101,6 +102,13 @@ export const cartReducer = (state: State, action: Action): State => {
       };
     }
 
+    case "CHECKOUT": {
+      return {
+        ...state,
+        products: [],
+        totalAmount: 0,
+      };
+    }
     default:
       return state;
   }

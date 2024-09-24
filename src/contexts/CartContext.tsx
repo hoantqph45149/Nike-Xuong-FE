@@ -3,6 +3,7 @@ import api from "../api";
 import { notifyError, notifySuccess } from "../components/ToastManager/index";
 import { CartItem, cartReducer } from "../reduces/Cart";
 import MyLoader from "./../components/MyLoader/index";
+import { CheckoutType } from "../interfaces/Checkout";
 
 export type CartContextType = {
   state: {
@@ -11,7 +12,6 @@ export type CartContextType = {
   };
   dispatch: React.Dispatch<any>;
   addToCart: (productId: string, quantity: number, size: string) => void;
-  checkout: () => void;
   removeFromCart: (productId: string, size: string) => void;
   updateCart: (
     productId: string,
@@ -19,6 +19,7 @@ export type CartContextType = {
     size: string,
     oldSize: string
   ) => void;
+  checkout: (data: CheckoutType) => void;
 };
 
 const initialState = {
@@ -106,13 +107,16 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const checkout = async () => {
+  const checkout = async (data: CheckoutType) => {
     try {
-      const res = await api.post("/cart/checkout");
-
-      notifySuccess("Checkout successful");
+      console.log(data);
+      const res = await api.post("/cart/checkout", data);
+      console.log(res.data.url);
+      // window.location.href = res.data.url;
+      dispatch({ type: "CHECKOUT", payload: res.data });
+      // notifySuccess("Successfully checked out");
     } catch (error) {
-      notifyError("Error checking out");
+      console.log(error);
     }
   };
 

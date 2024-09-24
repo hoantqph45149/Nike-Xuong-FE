@@ -4,12 +4,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import style from "./ScrollProduct.module.scss";
+import {
+  ProductContext,
+  ProductContextType,
+} from "../../contexts/ProductContext";
 
 const cx = classNames.bind(style);
 
 const ScrollProduct = ({ href }: any) => {
+  const { state } = useContext(ProductContext) as ProductContextType;
   useEffect(() => {
     const prevButton: any = document.getElementById("prev");
     const nextButton: any = document.getElementById("next");

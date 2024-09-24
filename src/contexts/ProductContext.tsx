@@ -9,6 +9,7 @@ export type ProductContextType = {
   dispatch: React.Dispatch<any>;
   removeProduct: (id: string | undefined) => void;
   handleProduct: (data: Product) => void;
+  searchProduct: (q: string) => void;
 };
 export const ProductContext = createContext({} as ProductContextType);
 
@@ -22,6 +23,7 @@ export const ProductProvider = ({
   useEffect(() => {
     (async () => {
       const { data } = await api.get("/products");
+      console.log(data);
       dispatch({ type: "SET_PRODUCTS", payload: data.data });
     })();
   }, []);
@@ -54,9 +56,18 @@ export const ProductProvider = ({
       }
     })();
   };
+  const searchProduct = async (q: string) => {
+    try {
+      const res = await api.get(`/search/product?q=${q}`);
+      dispatch({ type: "SET_PRODUCTS", payload: res.data.data });
+      nav("/shop");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <ProductContext.Provider
-      value={{ state, dispatch, removeProduct, handleProduct }}
+      value={{ state, dispatch, removeProduct, handleProduct, searchProduct }}
     >
       {children}
     </ProductContext.Provider>
