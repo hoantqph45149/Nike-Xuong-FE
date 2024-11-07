@@ -5,6 +5,9 @@ const sizeSchema = z.object({
   quantity: z.number().min(0, "Quantity must be at least 0").optional(),
 });
 
+export const colorSchema = z.object({
+  color: z.string().min(1, "Color is required"),
+});
 export const productSchema = z.object({
   title: z.string().min(6, "Title must be at least 6 characters").trim(),
   price: z.number().min(0, "Price must be a positive number"),
@@ -12,6 +15,8 @@ export const productSchema = z.object({
   categoryId: z.string().min(1, "Category ID is required"),
   sizes: z.array(sizeSchema).min(1, "At least one size is required"), // Thêm xác thực cho sizes
   thumbnail: z.string().url().optional(), // Thêm xác thực cho thumbnail (có thể là URL)
+  colors: z.array(colorSchema).min(1, "At least one color is required"),
+  gender: z.enum(["Man", "Woman", "Unisex"]),
 });
 
 export const categorySchema = z.object({

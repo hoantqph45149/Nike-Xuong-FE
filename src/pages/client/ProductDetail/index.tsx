@@ -2,10 +2,10 @@ import classNames from "classnames/bind";
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import api from "../../api";
-import Button from "../../components/Button";
-import { CartContext, CartContextType } from "../../contexts/CartContext";
-import { Product } from "../../interfaces/Product";
+import api from "../../../api";
+import Button from "../../../components/Button";
+import { CartContext, CartContextType } from "../../../contexts/CartContext";
+import { Product } from "../../../interfaces/Product";
 import style from "./ProductDetail.module.scss";
 const cx = classNames.bind(style);
 

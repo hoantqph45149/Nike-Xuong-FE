@@ -2,6 +2,8 @@ import { Category } from "../interfaces/Category";
 
 type State = {
   categories: Category[];
+  loading: boolean;
+  error: string;
 };
 type Acction = {
   type: string;

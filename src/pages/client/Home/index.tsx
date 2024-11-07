@@ -1,6 +1,6 @@
-import PromoBox from "../../components/PromoBox";
-import ScrollProduct from "../../components/ScrollProduct";
-import Slideshow from "../../components/SlideShow";
+import PromoBox from "../../../components/PromoBox";
+import ScrollProduct from "../../../components/ScrollProduct";
+import Slideshow from "../../../components/SlideShow";
 
 const Home = () => {
   return (

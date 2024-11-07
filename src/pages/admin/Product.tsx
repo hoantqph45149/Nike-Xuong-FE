@@ -42,7 +42,8 @@ const Product = () => {
               </td>
               <td>
                 {stateCategories.categories.find(
-                  (category) => category._id === item.categoryId
+                  (category) =>
+                    category._id?.toString() === item.categoryId.toString()
                 )?.name || "Unknown"}
               </td>
               <td>{item.description}</td>

@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import Button from "../../components/Button";
-import { CartContext, CartContextType } from "../../contexts/CartContext";
+import Button from "../../../components/Button";
+import { CartContext, CartContextType } from "../../../contexts/CartContext";
 import style from "./CartProduct.module.scss";
 const cx = classNames.bind(style);
 

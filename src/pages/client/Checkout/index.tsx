@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import style from "./Checkout.module.scss";
 import classNames from "classnames/bind";
-import Button from "../../components/Button";
-import { CartContext, CartContextType } from "../../contexts/CartContext";
+import Button from "../../../components/Button";
+import { CartContext, CartContextType } from "../../../contexts/CartContext";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckoutSchema } from "../../utils/validation";
-import { CheckoutType } from "../../interfaces/Checkout";
+import { CheckoutSchema } from "../../../utils/validation";
+import { CheckoutType } from "../../../interfaces/Checkout";
 
 const cx = classNames.bind(style);
 const Checkout = () => {
@@ -40,7 +40,7 @@ const Checkout = () => {
                     <input
                       type="radio"
                       id="stripe"
-                      value="Stripe"
+                      value="stripe"
                       {...register("payment")}
                     />
                     <label htmlFor="stripe">Stripe</label>

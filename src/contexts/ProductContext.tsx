@@ -23,7 +23,7 @@ export const ProductProvider = ({
   useEffect(() => {
     (async () => {
       const { data } = await api.get("/products");
-      console.log(data);
+      // console.log(data);
       dispatch({ type: "SET_PRODUCTS", payload: data.data });
     })();
   }, []);
@@ -48,6 +48,7 @@ export const ProductProvider = ({
           nav("/admin/products");
         } else {
           const res = await api.post("/products", data);
+          console.log(res.data.data);
           dispatch({ type: "CREATE_PRODUCT", payload: res.data.data });
           nav("/admin/products");
         }
@@ -65,6 +66,7 @@ export const ProductProvider = ({
       console.log(error);
     }
   };
+
   return (
     <ProductContext.Provider
       value={{ state, dispatch, removeProduct, handleProduct, searchProduct }}

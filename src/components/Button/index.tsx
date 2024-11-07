@@ -20,6 +20,7 @@ const Button = ({
     [variant]: variant,
     [color]: color,
     [border]: border,
+    [backgroundColor]: backgroundColor,
   });
 
   if (href) {

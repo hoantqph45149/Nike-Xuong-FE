@@ -4,8 +4,8 @@ import { useContext } from "react";
 import {
   ProductContext,
   ProductContextType,
-} from "../../contexts/ProductContext";
-import ProductCard from "../../components/ProductCard";
+} from "../../../contexts/ProductContext";
+import ProductCard from "../../../components/ProductCard";
 const cx = classNames.bind(style);
 
 const Shop = () => {

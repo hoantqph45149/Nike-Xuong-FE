@@ -53,6 +53,7 @@ export const CategoryPovider = ({
       }
     })();
   };
+
   return (
     <CategoryContext.Provider
       value={{ state, dispatch, removeCategory, handleCategory }}

@@ -1,6 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
-import NotFound from "../../../pages/NotFound";
+import NotFound from "../../../pages/client/NotFound";
 import classNames from "classnames/bind";
 import style from "./LayoutAdmin.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -40,7 +40,7 @@ const LayoutAdmin = () => {
               <Link to="/admin/categories">Categories</Link>
             </li>
             <li>
-              <Link to="/admin/brands">Brands</Link>
+              <Link to="/admin/order">Orders</Link>
             </li>
           </ul>
         </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../api";
-import ImageUpload from "../components/ImageUpload";
+import api from "../../api";
+import ImageUpload from "../../components/ImageUpload";
 
 const UpdateAvata = () => {
   const nav = useNavigate();

@@ -19,6 +19,7 @@ const ScrollProduct = ({ href }: any) => {
     const prevButton: any = document.getElementById("prev");
     const nextButton: any = document.getElementById("next");
     const productContainer: any = document.getElementById("productContainer");
+    const product: any = document.getElementById("product");
 
     const handlePrevClick = () => {
       productContainer.scrollBy({
@@ -28,14 +29,20 @@ const ScrollProduct = ({ href }: any) => {
     };
 
     const handleNextClick = () => {
+      console.log(product.clientWidth);
       productContainer.scrollBy({
-        left: productContainer.clientWidth / 3,
+        left: product.clientWidth,
         behavior: "smooth",
       });
     };
 
     const handleScroll = () => {
       prevButton.disabled = productContainer.scrollLeft === 0;
+      console.log(
+        productContainer.scrollLeft,
+        productContainer.clientWidth,
+        productContainer.scrollWidth
+      );
       nextButton.disabled =
         productContainer.scrollLeft + productContainer.clientWidth >=
         productContainer.scrollWidth;
@@ -69,7 +76,7 @@ const ScrollProduct = ({ href }: any) => {
       </div>
       <div className={cx("product-container")} id="productContainer">
         {Array.from({ length: 10 }, (_, i) => (
-          <div className={cx("product")} key={i}>
+          <div id="product" className={cx("product")} key={i}>
             <img
               src={`https://picsum.photos/1000/1000?random=${i}`}
               alt={`Product ${i + 1}`}

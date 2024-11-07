@@ -11,6 +11,8 @@ export interface Product {
     isHidden: boolean;
     products: string[];
   };
+  colors?: Array<{ _id?: string; color: string }>;
+  gender: "Man" | "Woman" | "Unisex";
   thumbnail?: string;
   sizes: Array<{
     _id?: string;

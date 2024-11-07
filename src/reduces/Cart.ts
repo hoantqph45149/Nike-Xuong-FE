@@ -1,4 +1,3 @@
-import React, { createContext, useReducer, useContext, ReactNode } from "react";
 import { Product } from "../interfaces/Product";
 
 // Define types for cart items and state

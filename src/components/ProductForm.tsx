@@ -31,12 +31,21 @@ const ProductForm = () => {
     resolver: zodResolver(productSchema),
     defaultValues: {
       sizes: [{ size: "", quantity: 0 }],
+      colors: [{ color: "" }],
     },
   });
 
-  const { fields, append, remove, update } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: "sizes",
+  });
+  const {
+    fields: colorFields,
+    append: appendColor,
+    remove: removeColor,
+  } = useFieldArray({
+    control,
+    name: "colors",
   });
 
   const handleImageUploadSuccess = (url: string) => {
@@ -70,6 +79,12 @@ const ProductForm = () => {
               append(size);
             });
           }
+
+          if (data.data.colors) {
+            data.data.colors.forEach((color: string) => {
+              appendColor({ color });
+            });
+          }
         } catch (error) {
           console.error("Lỗi khi lấy sản phẩm:", error);
         }
@@ -78,6 +93,7 @@ const ProductForm = () => {
   }, [id, reset, setValue, append, remove]);
 
   const onSubmit = async (data: Product) => {
+    console.log(data);
     try {
       handleProduct({ ...data, thumbnail, _id: id });
       reset();
@@ -157,6 +173,50 @@ const ProductForm = () => {
           {errors.thumbnail && (
             <span className="text-danger">{errors.thumbnail.message}</span>
           )}
+        </div>
+        <div className="mb-3">
+          <label htmlFor="gender" className="form-label">
+            Gender
+          </label>
+          <select className="form-select" id="gender" {...register("gender")}>
+            <option value="">---Chọn giới tính---</option>
+            <option value="Man">Man</option>
+            <option value="Woman">Woman</option>
+            <option value="unisex">Unisex</option>
+          </select>
+          {errors.gender && (
+            <span className="text-danger">{errors.gender.message}</span>
+          )}
+        </div>
+        <div className="mb-3">
+          <label htmlFor="color" className="form-label">
+            Color
+          </label>
+          {colorFields.map((field, index) => (
+            <div className="mb-3 d-flex gap-2" key={field.id}>
+              <input
+                type="text"
+                id="color"
+                className="form-control"
+                {...register(`colors.${index}.color`, { required: true })}
+                defaultValue={field.color}
+              />
+              <button
+                type="button"
+                className="btn btn-danger "
+                onClick={() => removeColor(index)}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={() => appendColor({ color: "" })}
+          >
+            Add color
+          </button>
         </div>
         <div className="mb-3">
           <label>Sizes</label>

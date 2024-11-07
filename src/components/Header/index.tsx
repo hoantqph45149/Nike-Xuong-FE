@@ -13,11 +13,11 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import images from "../../assets/images";
 import { AuthContext, AuthContextType } from "../../contexts/AuthContext";
-import style from "./Header.module.scss";
 import {
   ProductContext,
   ProductContextType,
 } from "../../contexts/ProductContext";
+import style from "./Header.module.scss";
 
 const cx = classNames.bind(style);
 const Header = () => {

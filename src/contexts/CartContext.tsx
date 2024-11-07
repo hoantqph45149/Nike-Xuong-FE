@@ -54,6 +54,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
     quantity: number,
     size: string
   ) => {
+    console.log(productId, quantity, size);
     try {
       const res = await api.post("/cart", { productId, quantity, size });
 

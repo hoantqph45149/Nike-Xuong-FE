@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import api from "../api";
-import { AuthContext, AuthContextType } from "../contexts/AuthContext";
-import { User } from "../interfaces/User";
-import { profileSchema } from "../utils/validation";
+import api from "../../api";
+import { AuthContext, AuthContextType } from "../../contexts/AuthContext";
+import { User } from "../../interfaces/User";
+import { profileSchema } from "../../utils/validation";
 
 const UpdateProfile = () => {
   const [loading, setLoading] = useState<boolean>(true);
